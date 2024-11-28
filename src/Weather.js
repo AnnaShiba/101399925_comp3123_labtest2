@@ -6,7 +6,8 @@ function kelvinToCelsius(kelvin) {
 }
 
 function Weather({ city }) {
-  const [weatherData, setWeatherData] = useState({});
+  const today = new Date();
+  const [weatherData, setWeatherData] = useState({ weather: [ { icon: '01d', description: 'test' } ], main: { temp: 0, feels_like: 0, humidity: 0, pressure: 0 } });
 
   useEffect(() => {
     if (city) {
@@ -22,20 +23,25 @@ function Weather({ city }) {
 
 
   return (
-    <div className="box">
+    <div className="weather-box">
       {weatherData.weather ? (
-        <div class="item item1">
-          <h2>Today Forecast</h2>
-          <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt={weatherData.weather[0].description} />
-
-          <p>{weatherData.weather[0].description} {weatherData.weather[0].icon}</p>
-          <p>Temperature: {kelvinToCelsius(weatherData.main.temp)} °C</p>
-          <p>Feels like: {kelvinToCelsius(weatherData.main.feels_like)} °C</p>
-          <p>Humidity: {weatherData.main.humidity}%</p>
-          <p>Pressure: {weatherData.main.pressure} kpa</p>
+        <div>
+          <h2>{new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(today)} Forecast</h2>
+          <div class="item">
+            <div class="weather-column">
+              <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt={weatherData.weather[0].description} />
+              <p>{weatherData.weather[0].description}</p>
+            </div>
+            <div class="weather-column">
+              <p>Temperature:<br/>{kelvinToCelsius(weatherData.main.temp)} °C</p>
+              <p>Feels like:<br/>{kelvinToCelsius(weatherData.main.feels_like)} °C</p>
+              <p>Humidity:<br/>{weatherData.main.humidity}%</p>
+              <p>Pressure:<br/>{weatherData.main.pressure} kpa</p>
+            </div>
+          </div>
         </div>
       ) : (
-        <div class="item item1">
+        <div class="item">
           No data available
         </div>
       )}

@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.weather-box {
+    display: flex;
+    justify-content: center;
+    background: url(../public/hero.jpg);
+    background-size: cover;
+}
+
+.item {
+    background-color: #1692b1f3;
+    margin: 2em;
+    padding: 2em;
+    color: #014546;
+    max-width: 30em;
+    border-radius: 10px;
+}
+
+.weather-column {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.weather-column img {
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.weather-column p {
+  margin-right: 25px;
+  color: white;
+}
